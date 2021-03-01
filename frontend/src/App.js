@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import auth from './utils/auth'
 import {setCurrentUser} from "./redux/user/user.actions"
-import SignInSignUp from './pages/sign-in-sign-up/sign-in-sign-up.compenent'
+import AppRouter from './router/AppRouter'
+// import SignInSignUp from './pages/sign-in-sign-up/sign-in-sign-up.compenent'
 
 
 
@@ -17,7 +18,7 @@ if(localStorage.authToken) {
 function App() {
   return (
     <div className="App">
-      <SignInSignUp/>
+<AppRouter/>
     </div>
   );
 }
