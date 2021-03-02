@@ -4,10 +4,11 @@ import {connect} from 'react-redux'
 
 
 const PublicRoute = ({isAuthenticated, component: Component, ...otherProps}) => {
+    return(
     <Route
     {...otherProps}
     render = {(props) => isAuthenticated ? <Redirect to='/home'/> : <Component {...props}/>}
-/>
+/>)
 }
 
 const mapStateToProps = state => ({

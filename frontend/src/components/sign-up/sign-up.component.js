@@ -13,11 +13,15 @@ const SignUpForm = ( {register, resetAuthError, user}) => {
 // const {userName, userEmail} = user
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [address, setAddress] = useState('')
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPAssword] = useState('');
     const [nameError, setNameError ] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [phoneNumberError, setPhoneNumberError] = useState('');
+    const [addressError,setAddressError] = useState('')
 
     useEffect(() => {
         resetAuthError();
@@ -104,6 +108,23 @@ return(
         onChange={setRepeatPAssword}
         label='repeat password'
         error={passwordError}/>
+
+        <FormInput
+        type='text'
+        name='phone number'
+        value={phoneNumber}
+        onChange={setPhoneNumber}
+        label='phone number'
+        error={setPhoneNumberError}/>
+
+<FormInput
+        type='text'
+        name='address'
+        value={address}
+        onChange={setAddress}
+        label='address'
+        error={setAddressError}/>
+
 
         
         <CustomButton onClick={onSubmit} inverted>sign in</CustomButton>

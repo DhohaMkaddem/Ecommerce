@@ -9,3 +9,7 @@ export const currentUserSelector = createSelector(
 
 
 
+export const authSelector = createSelector(
+    [userSelector],
+    user=>user.isAuthenticated
+)

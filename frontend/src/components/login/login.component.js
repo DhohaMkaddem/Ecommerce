@@ -4,7 +4,7 @@ import {login, resetAuthError} from '../../redux/user/user.actions'
 import FormInput from '../utils/custom-components/form-input/form-input.component'
 import CustomButton from '../utils/custom-components/custom-button/custom-button.component'
 
-const LoginForm = ({login, authError}) => {
+const LoginForm = ({login, authError, history}) => {
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -43,7 +43,7 @@ const LoginForm = ({login, authError}) => {
         if(!isFormValid){
             return
         } else {
-            login({email, password})
+            login({email, password}, history)
         }
     }
 

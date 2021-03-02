@@ -17,7 +17,7 @@ export const login = (userInfo, history) => async (dispatch)=>{
 
         dispatch(setCurrentUser(decoded))
          dispatch(resetAuthError())
-        // history.push('/home')
+        history.push('/home')
     } catch (error) {
        
         dispatch({
@@ -36,7 +36,7 @@ export const register = (userInfo, history) => async (dispatch) => {
         const decoded = jwt_decode(data.token)
         dispatch(setCurrentUser(decoded))
          dispatch(resetAuthError())
-        // history.push('/home')
+        history.push('/home')
     } catch (error) {
         if(error.response.data.includes("duplicate key")){
             dispatch({
@@ -58,7 +58,7 @@ export const editUser = (userInfo, history) => async (dispatch) => {
         const decoded = jwt_decode(data.token)
         dispatch(setCurrentUser(decoded))
          dispatch(resetAuthError())
-// history.push('/home')
+history.push('/home')
     } catch (error) {
         if(error.response.data.includes("duplicate key")){
             dispatch({

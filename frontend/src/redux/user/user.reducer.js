@@ -14,7 +14,7 @@ const userReducer = (state= INITIAL_STATE, action)=>{
         {
         return {
             ...state, currentUser:action.payload,
-            isAuthenticated:  true
+            isAuthenticated: !!Object.keys(action.payload).length
         }
     }
 
