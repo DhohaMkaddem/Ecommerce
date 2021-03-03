@@ -84,3 +84,9 @@ export const logout = () => (dispatch) => {
     setAuthToken(null);
     dispatch(setCurrentUser({}));
   };
+
+
+  export const toggleHidden = () => ({
+      type: userActionsTypes.TOGGLE_HIDDEN
+
+  })

@@ -1,143 +1,140 @@
+import react, { useState, useEffect } from "react";
+import "./sign-up.style.scss";
+import CustomButton from "../utils/custom-components/custom-button/custom-button.component";
+import FormInput from "../utils/custom-components/form-input/form-input.component";
+import { currentUserSelector } from "../../redux/user/user.selectors";
+import { createStructuredSelector } from "reselect";
+import { register, resetAuthError } from "../../redux/user/user.actions";
+import { connect } from "react-redux";
 
-import react, {useState, useEffect} from 'react'
-import './sign-up.style.scss'
-import CustomButton from '../utils/custom-components/custom-button/custom-button.component'
-import FormInput from '../utils/custom-components/form-input/form-input.component'
-import {currentUserSelector} from '../../redux/user/user.selectors'
- import {createStructuredSelector} from 'reselect'
-import {register, resetAuthError} from '../../redux/user/user.actions'
-import {connect} from 'react-redux'
+const SignUpForm = ({ register, resetAuthError, user }) => {
+  const [name, setName] = useState(user.name || "");
+  const [email, setEmail] = useState(user.email || "");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPAssword] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState("");
+  const [addressError, setAddressError] = useState("");
 
+  useEffect(() => {
+    resetAuthError();
+  }, []);
 
-const SignUpForm = ( {register, resetAuthError, user}) => {
-// const {userName, userEmail} = user
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [address, setAddress] = useState('')
-    const [password, setPassword] = useState('');
-    const [repeatPassword, setRepeatPAssword] = useState('');
-    const [nameError, setNameError ] = useState('');
-    const [emailError, setEmailError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const [phoneNumberError, setPhoneNumberError] = useState('');
-    const [addressError,setAddressError] = useState('')
-
-    useEffect(() => {
-        resetAuthError();
-
-    }, [])
-
-
-const handleFormValidation = () => {
-
+  const handleFormValidation = () => {
     let isFormValid = true;
     const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    if(name < 2) {
-        setNameError('please enter your name')
-        isFormValid=false
+    if (name < 2) {
+      setNameError("please enter your name");
+      isFormValid = false;
     } else {
-        setNameError('')
+      setNameError("");
     }
-    if(email==="" || !emailRegex.test(email)){
-        setEmailError('please enter a valid email')
-        isFormValid = false
+    if (email === "" || !emailRegex.test(email)) {
+      setEmailError("please enter a valid email");
+      isFormValid = false;
     } else {
-        setEmailError('')
-
-    }
-    
-    if ( password<5 ){
-        setPasswordError('please enter a password with five character minimum')
-        isFormValid = false
-    } else {
-        setPasswordError('')
-    }
-    if( password!==repeatPassword){
-        setPasswordError("password did not  match")
-        isFormValid = false
-    } else {
-        setPasswordError('')
+      setEmailError("");
     }
 
-    return isFormValid
-}
+    if (password < 5) {
+      setPasswordError("please enter a password with five character minimum");
+      isFormValid = false;
+    } else {
+      setPasswordError("");
+    }
+    if (password !== repeatPassword) {
+      setPasswordError("password did not  match");
+      isFormValid = false;
+    } else {
+      setPasswordError("");
+    }
 
-const onSubmit = (e) => {
+    return isFormValid;
+  };
+
+  const onSubmit = (e) => {
     e.preventDefault();
     const isFormValid = handleFormValidation();
-    if(!isFormValid){
-        return
+    if (!isFormValid) {
+      return;
     } else {
-      register({name, email, password})
+      register({ name, email, password });
     }
-
-}
-
-return(
+  };
+  const edit = (e) => {
+    e.preventDefault();
+  };
+  return (
     <form>
-        <FormInput 
-        type='text'
-        name='name'
+      <FormInput
+        type="text"
+        name="name"
         value={name}
         onChange={setName}
-        label='name'
-        error={nameError}/>
+        label="name"
+        error={nameError}
+      />
 
-        
-        <FormInput 
-        type='email'
-        name='email'
+      <FormInput
+        type="email"
+        name="email"
         value={email}
         onChange={setEmail}
-        label='email'
-        error={emailError}/>
-        
-        <FormInput 
-        type='password'
-        name='password'
+        label="email"
+        error={emailError}
+      />
+
+      <FormInput
+        type="password"
+        name="password"
         value={password}
         onChange={setPassword}
-        label='password'
-        error={passwordError}/>
-        
-        <FormInput
-        type='password'
-        name='repeat password'
+        label="password"
+        error={passwordError}
+      />
+
+      <FormInput
+        type="password"
+        name="repeat password"
         value={repeatPassword}
         onChange={setRepeatPAssword}
-        label='repeat password'
-        error={passwordError}/>
+        label="repeat password"
+        error={passwordError}
+      />
 
-        <FormInput
-        type='text'
-        name='phone number'
+      <FormInput
+        type="text"
+        name="phone number"
         value={phoneNumber}
         onChange={setPhoneNumber}
-        label='phone number'
-        error={setPhoneNumberError}/>
+        label="phone number"
+        error={setPhoneNumberError}
+      />
 
-<FormInput
-        type='text'
-        name='address'
+      <FormInput
+        type="text"
+        name="address"
         value={address}
         onChange={setAddress}
-        label='address'
-        error={setAddressError}/>
+        label="address"
+        error={setAddressError}
+      />
 
-
-        
-        <CustomButton onClick={onSubmit} inverted>sign in</CustomButton>
+      <CustomButton onClick={onSubmit} inverted>
+        {user ? "edit" : "sign in"}
+      </CustomButton>
     </form>
-)
-}
+  );
+};
 
-const mapStateToProps  = createStructuredSelector({
-    user : currentUserSelector
-})
+const mapStateToProps = createStructuredSelector({
+  user: currentUserSelector,
+});
 
-export default connect(
-    mapStateToProps,
-    {register, resetAuthError}
-)
-(SignUpForm)
+export default connect(mapStateToProps, { register, resetAuthError })(
+  SignUpForm
+);

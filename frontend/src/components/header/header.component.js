@@ -1,25 +1,32 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import {hiddenSelector, authSelector} from '../../redux/user/user.selectors'
+import UserCart from '../../components/user-cart/user-cart.component'
 import { createStructuredSelector } from "reselect";
 import { logout } from "../../redux/user/user.actions";
-import { authSelector } from "../../redux/user/user.selectors";
-import {withRouter} from 'react-router-dom'
-const Header = ({ isAuthenticated, logout, history }) => {
-const signOut = ()=> {
-logout();
-history.push('/home')
-} 
+
+
+import UserIcon from '../user-icon/user-icon.component'
+import './header.style.scss'
+
+
+const Header = ({hidden, isAuthenticated}) => {
+
 
   return (
     <div className="header">
       <Link className="option" to="/home">
         HOME
       </Link>
+     
       {isAuthenticated ? (
-        <button className="option" onClick={signOut}>
-          logout
-        </button>
+            
+          <div>
+          <UserIcon className='option'/>
+          {hidden ? (<UserCart />):null}
+          </div>
+        
       ) : (
         <Link className="option" to="/users/login">
           LOGIN
@@ -30,5 +37,7 @@ history.push('/home')
 };
 const mapStateToProps = createStructuredSelector({
   isAuthenticated: authSelector,
+  hidden : hiddenSelector,
+  
 });
-export default withRouter(connect(mapStateToProps, { logout })(Header));
+export default connect(mapStateToProps, { logout })(Header);

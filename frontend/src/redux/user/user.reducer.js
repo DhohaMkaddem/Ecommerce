@@ -4,7 +4,8 @@ import userActionsTypes from './user.types'
 const INITIAL_STATE = {
     currentUser:null,
     authError:"",
-    isAuthenticated: false
+    isAuthenticated: false,
+    hidden:false
 }
 
 const userReducer = (state= INITIAL_STATE, action)=>{
@@ -24,6 +25,12 @@ const userReducer = (state= INITIAL_STATE, action)=>{
                 ...state, authError:action.payload
             }
         }
+    case userActionsTypes.TOGGLE_HIDDEN:
+        {
+            return {
+                ...state, hidden:!state.hidden
+            }
+        }    
         default:
             return state;
     }

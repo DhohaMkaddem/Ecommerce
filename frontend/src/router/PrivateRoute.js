@@ -4,14 +4,13 @@ import {connect} from 'react-redux'
 
 
 
-
 const PrivateRoute  = ({isAuthenticated, component: Component, ...otherProps}) => {
-    <Route
+  return ( <Route
     {...otherProps}
 
-    render = {(props)=>isAuthenticated? <Component {...props}/> : <Redirect to="/home"/>
+    render = {(props) =>  isAuthenticated ? (<Component {...props}/>) : (<Redirect to="/home"/>)
 }
-/>
+/>)
 }
 
 const mapStateToProps = state =>({

@@ -16,7 +16,7 @@ const FormInput = ({onChange, label, error, ...otherProps}) => (
      
      }
 
-{error && <p>{error}</p>}
+{error ?  <p className="error"> {error} </p>: null }
 </div>
 )
 

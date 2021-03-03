@@ -13,3 +13,8 @@ export const authSelector = createSelector(
     [userSelector],
     user=>user.isAuthenticated
 )
+
+export const hiddenSelector = createSelector(
+    [userSelector],
+    user=>user.hidden
+)
