@@ -85,8 +85,8 @@ router.post("/", async (req, res) => {
     }
   });
 
-
-  router.patch("/", auth, async (req,res) => {
+// edit user
+  router.patch("/edit", auth, async (req,res) => {
     const {name, email, password } = req.body;
     const updates = {}
     if(name){
@@ -114,7 +114,7 @@ router.post("/", async (req, res) => {
       }
       jwt.sign(
         payload,
-        process.env.JWT_SECRET,
+        'eshop',
         { expiresIn: 10800 },
         (err, token) => {
           if (err) throw err;
@@ -122,7 +122,7 @@ router.post("/", async (req, res) => {
         }
       );
     } catch (error) {
-      res.status(500).send(err.message);
+      res.status(500).send(error.message);
     }
   })
   

@@ -1,15 +1,15 @@
-import react, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./sign-up.style.scss";
 import CustomButton from "../utils/custom-components/custom-button/custom-button.component";
 import FormInput from "../utils/custom-components/form-input/form-input.component";
 import { currentUserSelector } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
-import { register, resetAuthError } from "../../redux/user/user.actions";
+import { register, resetAuthError, editUser } from "../../redux/user/user.actions";
 import { connect } from "react-redux";
 
-const SignUpForm = ({ register, resetAuthError, user }) => {
-  const [name, setName] = useState(user.name || "");
-  const [email, setEmail] = useState(user.email || "");
+const SignUpForm = ({ register, resetAuthError, user, editUser, history }) => {
+  const [name, setName] = useState(user?user.name:"");
+  const [email, setEmail] = useState(user?user.email:"");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -62,11 +62,12 @@ const SignUpForm = ({ register, resetAuthError, user }) => {
     if (!isFormValid) {
       return;
     } else {
-      register({ name, email, password });
+      register({ name, email, password, phoneNumber, address }, history);
     }
   };
   const edit = (e) => {
     e.preventDefault();
+    editUser({name,email, password}, history)
   };
   return (
     <form>
@@ -124,7 +125,7 @@ const SignUpForm = ({ register, resetAuthError, user }) => {
         error={setAddressError}
       />
 
-      <CustomButton onClick={onSubmit} inverted>
+      <CustomButton onClick={user? edit:onSubmit} inverted>
         {user ? "edit" : "sign in"}
       </CustomButton>
     </form>
@@ -135,6 +136,6 @@ const mapStateToProps = createStructuredSelector({
   user: currentUserSelector,
 });
 
-export default connect(mapStateToProps, { register, resetAuthError })(
+export default connect(mapStateToProps, { register, resetAuthError, editUser })(
   SignUpForm
 );

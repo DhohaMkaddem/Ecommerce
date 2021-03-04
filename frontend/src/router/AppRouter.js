@@ -12,10 +12,10 @@ const AppRouter  = () => {
     <Router>
     <Header/>
     <Switch>
-    <Route exact path='/home' component={Home}/>
+    <Route exact path='/home' Component={Home}/>
     <PublicRoute path='/users/login' component={LoginForm}/>
-    <PublicRoute path='/users' component={SignInSignUp}/>
-    <PrivateRoute path='/edit-user' component={SignUpForm}/>
+    <PublicRoute exact path='/users/' component={SignInSignUp}/>
+    <PrivateRoute path='/users/edit' component={SignUpForm}/>
     </Switch>
     </Router>)
 }

@@ -7,7 +7,7 @@ import {withRouter} from 'react-router-dom'
 import {currentUserSelector} from '../../redux/user/user.selectors'
 import {createStructuredSelector} from 'reselect'
 import CustomButton from '../utils/custom-components/custom-button/custom-button.component'
-import { createStore } from 'redux'
+
 const UserCart =({logout, history, user}) => {
     const signOut = () => {
         logout();
@@ -17,7 +17,8 @@ history.push('/home')
     return(
     <div className='user-cart'>
         <span>bonjour {user.name}!</span>
-        <Link to='/edit-user' user={user}>compte</Link>
+
+        <Link to='/users/edit'> compte </Link>
 
          <CustomButton onClick={signOut}>
            logout  </CustomButton>
