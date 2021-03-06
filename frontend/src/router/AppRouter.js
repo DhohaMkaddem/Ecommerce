@@ -12,7 +12,7 @@ const AppRouter  = () => {
     <Router>
     <Header/>
     <Switch>
-    <Route exact path='/home' Component={Home}/>
+    <Route exact path='/home' component={Home}/>
     <PublicRoute path='/users/login' component={LoginForm}/>
     <PublicRoute exact path='/users/' component={SignInSignUp}/>
     <Route path='/users/edit' component={SignUpForm}/>

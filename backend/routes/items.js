@@ -18,7 +18,7 @@ router.post("/item", async (req, res) => {
     };
     res.json({ payload });
   } catch (error) {
-    res.status(500).send(error.messages);
+    res.status(500).send(error.message);
   }
 });
 

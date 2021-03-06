@@ -7,9 +7,9 @@ const ItemSchema = new mongoose.Schema({
         required: true
     },
     categorie: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "categories",
-        required: true
+        type: String,
+        required: true,
+        enum: ["kids", "women", "men", "home", "accessories", "newItem"]
     },
     imageUrl: {
         type:String,
