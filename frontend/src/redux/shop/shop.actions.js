@@ -3,8 +3,8 @@ import axios from "axios";
 
 export const getCollectionByCategory = (category) => async (dispatch) => {
   try {
-    const { data } = await axios.get(`/items/${category}`);
-    console.log(data);
+    const { data } = await axios.get('/items/hats');
+    
     dispatch(fetchPreviewCollection(data));
     dispatch(setItemLoading());
 

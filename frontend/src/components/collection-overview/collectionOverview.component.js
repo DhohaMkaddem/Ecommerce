@@ -9,7 +9,7 @@ const CollectionOverview = ({
 }) => {
     return(
         <div className='collection-overview'>
-    {collection.map(item=>(<ItemCart key={item.id} item={item}/>))}
+    {collection.map(item=>(<ItemCart key={item._id} item={item}/>))}
         </div>)
 }
    

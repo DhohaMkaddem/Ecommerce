@@ -6,6 +6,8 @@ import WithSpinner from '../utils/with-spinner/withSpinner.component'
 import {createStructuredSelector} from 'reselect'
 import CollectionOverview from './collectionOverview.component'
 
+
+
 const mapStateToProps= createStructuredSelector({
 isLoading: isLoadingSelector
 })

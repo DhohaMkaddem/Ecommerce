@@ -4,8 +4,11 @@ import { newCollectionSelector } from "../../redux/shop/shop.selectors";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import CollectionOverviewContainer from '../../components/collection-overview/colectionOverview.container'
-const Home = ({ getCollectionByCategory, newCollectionSelector }) => {
-  useEffect(() => {setTimeout(()=>getCollectionByCategory(""), 1000)}, []);
+
+
+const Home = ({ getCollectionByCategory }) => {
+
+  useEffect(()=> {getCollectionByCategory('hats')}, []);
 
   return (
     <div className="home">

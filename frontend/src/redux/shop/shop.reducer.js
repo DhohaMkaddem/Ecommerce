@@ -14,7 +14,7 @@ const shopReducer = (state = INITIAL_STATE, action) => {
             ...state,
             itemsPreviewCollections: [
               ...state.itemsPreviewCollections,
-              action.payload,
+              ...action.payload,
             ],
           }
         : { ...state, fetchError: "sorry no more article in this section" };
